@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -124,7 +124,7 @@ export default function HomePage() {
       startButton: "शिकण्याचे साहस सुरू करा",
       loginButton: "प्लॅटफॉर्ममध्ये प्रवेश करा",
       features: {
-        gamified: "गेमिफाइड लर्निंग",
+        gamified: "गेमिफाइડ लर्निंग",
         multilingual: "बहुभाषिक समर्थन",
         progress: "प्रगती ट्रॅकिंग",
         rewards: "उपलब्धी आणि पुरस्कार",
@@ -199,6 +199,13 @@ export default function HomePage() {
 
   const currentLang = languages[selectedLanguage as keyof typeof languages]
 
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("userLanguage")
+    if (storedLanguage) {
+      setSelectedLanguage(storedLanguage)
+    }
+  }, [])
+
   const handleLogin = async () => {
     if (!email.trim()) return
 
@@ -206,9 +213,10 @@ export default function HomePage() {
     // Simulate login process
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Store user session
-    localStorage.setItem("userEmail", email)
-    localStorage.setItem("userLanguage", selectedLanguage)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userEmail", email)
+      localStorage.setItem("userLanguage", selectedLanguage)
+    }
 
     // Navigate to dashboard
     router.push("/dashboard")

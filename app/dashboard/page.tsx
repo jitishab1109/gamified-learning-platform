@@ -13,20 +13,23 @@ export default function DashboardPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("english")
   const [selectedClass, setSelectedClass] = useState<number | null>(null)
   const [userEmail, setUserEmail] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user is logged in
-    const email = localStorage.getItem("userEmail")
-    const language = localStorage.getItem("userLanguage")
+    if (typeof window !== "undefined") {
+      const email = localStorage.getItem("userEmail")
+      const language = localStorage.getItem("userLanguage")
 
-    if (!email) {
-      router.push("/")
-      return
+      if (!email) {
+        router.push("/")
+        return
+      }
+
+      setUserEmail(email)
+      if (language) setSelectedLanguage(language)
     }
-
-    setUserEmail(email)
-    if (language) setSelectedLanguage(language)
+    setIsLoading(false)
   }, [router])
 
   const languages = {
@@ -196,7 +199,7 @@ export default function DashboardPage() {
       subtitle: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
       welcome: "ಮರಳಿ ಬಂದಿದ್ದಕ್ಕೆ ಸ್ವಾಗತ",
       selectClass: "ನಿಮ್ಮ ತರಗತಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-      activeGames: "ಸಕ್ರಿಯ ಆಟಗಳು",
+      activeGames: "ಸಕ್રಿಯ ಆಟಗಳು",
       joinChallenge: "ಸವಾಲಿನಲ್ಲಿ ಸೇರಿ",
       playNow: "ಈಗ ಆಡಿ",
       viewAll: "ಎಲ್ಲಾ ಆಟಗಳನ್ನು ನೋಡಿ",
@@ -306,10 +309,18 @@ export default function DashboardPage() {
     router.push(`/class/${classNumber}`)
   }
 
-  if (!userEmail) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
         <div className="text-white">Loading...</div>
+      </div>
+    )
+  }
+
+  if (!userEmail) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-white">Redirecting...</div>
       </div>
     )
   }
