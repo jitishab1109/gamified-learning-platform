@@ -1,0 +1,251 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens for better contrast on gradient backgrounds */
+  --background: oklch(0.15 0.1 270); /* Dark purple background for better contrast */
+  --foreground: oklch(0.98 0 0); /* Near white text for high contrast */
+  --card: oklch(0.99 0.01 85); /* Light cream for cards */
+  --card-foreground: oklch(0.3 0 0); /* Dark gray for card text */
+  --popover: oklch(0.15 0.1 270);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.65 0.2 35); /* Orange primary color */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.7 0.25 30); /* Bright orange accent */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.25 0.05 270);
+  --muted-foreground: oklch(0.8 0 0);
+  --accent: oklch(0.7 0.25 30); /* Bright orange for highlights */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.25 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.3 0.05 270);
+  --input: oklch(0.2 0.05 270);
+  --ring: oklch(0.65 0.2 35);
+  --chart-1: oklch(0.55 0.2 150); /* Green for charts */
+  --chart-2: oklch(0.65 0.2 35); /* Orange for charts */
+  --chart-3: oklch(0.6 0.25 270); /* Purple for charts */
+  --chart-4: oklch(0.7 0.2 200); /* Blue for charts */
+  --chart-5: oklch(0.7 0.25 30); /* Bright orange */
+  --radius: 0.75rem; /* Slightly more rounded corners */
+  --sidebar: oklch(0.2 0.05 270);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.65 0.2 35);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.7 0.25 30);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.3 0.05 270);
+  --sidebar-ring: oklch(0.65 0.2 35);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.7 0.25 30);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.7 0.25 30);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.7 0.25 30);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added high contrast utility classes for gradient backgrounds */
+.text-high-contrast {
+  color: oklch(0.98 0 0) !important; /* Near white for high contrast */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.text-medium-contrast {
+  color: oklch(0.9 0.02 270) !important; /* Light purple-tinted white */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.bg-high-contrast {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Updated color palette for inner frames with warmer, more vibrant colors */
+.card-warm-orange {
+  background: linear-gradient(135deg, #ff7849 0%, #ff5722 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-blue {
+  background: linear-gradient(135deg, #4fc3f7 0%, #2196f3 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-green {
+  background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-purple {
+  background: linear-gradient(135deg, #ab47bc 0%, #9c27b0 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-pink {
+  background: linear-gradient(135deg, #f06292 0%, #e91e63 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-teal {
+  background: linear-gradient(135deg, #4db6ac 0%, #009688 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-warm-indigo {
+  background: linear-gradient(135deg, #7986cb 0%, #3f51b5 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Class-specific sizing for hierarchical layout */
+.class-6-card {
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.class-7-card {
+  transform: scale(1.1);
+  z-index: 9;
+}
+
+.class-8-card {
+  transform: scale(1.05);
+  z-index: 8;
+}
+
+.class-9-card {
+  transform: scale(1.02);
+  z-index: 7;
+}
+
+.class-10-card {
+  transform: scale(1);
+  z-index: 6;
+}
+
+.class-11-card {
+  transform: scale(0.98);
+  z-index: 5;
+}
+
+.class-12-card {
+  transform: scale(0.95);
+  z-index: 4;
+}
+
+/* Added custom animations for gamified elements */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(234, 88, 12, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(234, 88, 12, 0.8);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
